@@ -1,0 +1,15 @@
+schema: spec-driven
+
+context: |
+    Description: A cli that help developer config oxlint&oxfmt&husky&lint-staged&commitlint quickly
+    Tech stack：TypeScript, Vite, vitest, commander.js, fs-extra, pathe, gradient-string, figlet, inquirer, ora, chalk, execa, detect-package-manager, semver
+    Style: oxlint, oxfmt, strict TypeScript
+
+rules:
+    proposal:
+        - Include rollback plan
+        - Identify affected components
+    specs:
+        - Use Given/When/Then format for scenarios
+    design:
+        - Include sequence diagrams for complex flows
