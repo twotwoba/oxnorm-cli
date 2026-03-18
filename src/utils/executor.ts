@@ -2,7 +2,7 @@ import { execa } from 'execa'
 import type { Options } from 'execa'
 import { logger } from './logger'
 
-export type PackageManager = 'npm' | 'yarn' | 'pnpm'
+export type PackageManager = 'npm' | 'yarn' | 'pnpm' | 'bun'
 
 export interface ExecuteOptions {
     cwd?: string
@@ -26,7 +26,7 @@ export async function executeCommand(
     }
 
     const result = await execa(command, args, execOptions)
-    return result.stdout
+    return result.stdout as string
 }
 
 export async function installPackage(

@@ -21,6 +21,8 @@ export function getInstallCommand(packageManager: PackageManager, isDev = true):
             return ['add', isDev ? '-D' : ''].filter(Boolean)
         case 'pnpm':
             return ['add', '-D']
+        case 'bun':
+            return ['bun', '-d']
     }
 }
 
@@ -32,5 +34,7 @@ export function getRunCommand(packageManager: PackageManager): string {
             return 'yarn'
         case 'pnpm':
             return 'pnpm'
+        case 'bun':
+            return 'bun'
     }
 }
