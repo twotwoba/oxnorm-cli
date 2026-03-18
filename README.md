@@ -13,7 +13,7 @@ A CLI tool to help developers quickly configure [oxlint](https://oxc.rs/docs/gui
 
 ## Requirements
 
-- Node.js >= 18.18.0
+- Node.js >= 20.12.0
 - A project with `package.json`
 
 ## Installation
