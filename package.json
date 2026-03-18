@@ -13,6 +13,9 @@
     ],
     "license": "MIT",
     "author": "EricYuan",
+    "repository": {
+        "url": "https://github.com/twotwoba/oxnorm-cli"
+    },
     "bin": {
         "ox": "./dist/index.js"
     },
