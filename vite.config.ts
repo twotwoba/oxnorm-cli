@@ -13,24 +13,25 @@ export default defineConfig({
 		sourcemap: true,
 		minify: false,
 		rollupOptions: {
+			// 只 external Node.js 内置模块
 			external: [
-				"commander",
-				"inquirer",
-				"execa",
-				"fs-extra",
-				"pathe",
-				"ora",
-				"chalk",
-				"gradient-string",
-				"figlet",
-				"detect-package-manager",
-				"semver",
+				"node:fs",
+				"node:path",
+				"node:process",
+				"node:child_process",
+				"node:util",
+				"node:os",
+				"node:stream",
+				"node:events",
+				"node:url",
 			],
 			output: {
 				banner: "#!/usr/bin/env node\n",
-				preserveModules: true,
-				preserveModulesRoot: "src",
 			},
+		},
+		commonjsOptions: {
+			include: [/node_modules/],
+			transformMixedEsModules: true,
 		},
 	},
 	resolve: {

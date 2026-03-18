@@ -1,10 +1,12 @@
-import { pathExists, writeFile } from "fs-extra";
+import fs from "fs-extra";
 import { resolve } from "pathe";
 import ora from "ora";
 import inquirer from "inquirer";
 import { PACKAGE_NAMES, COMMITLINT_CONFIG } from "../constants";
 import { installPackage, type PackageManager } from "../utils/executor";
 import { logger } from "../utils/logger";
+
+const { pathExists, writeFile } = fs;
 
 export async function setupCommitlint(
 	cwd: string,

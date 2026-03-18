@@ -1,4 +1,4 @@
-import execa from "execa";
+import { execa } from "execa";
 import type { Options } from "execa";
 import { logger } from "./logger";
 

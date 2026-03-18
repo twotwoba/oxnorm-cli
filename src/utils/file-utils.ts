@@ -1,6 +1,8 @@
-import { existsSync, readJson, writeJson } from "fs-extra";
-import { resolve } from "pathe";
+import fs from "fs-extra";
+import { resolve, dirname } from "pathe";
 import { logger } from "./logger";
+
+const { existsSync, readJson, writeJson, writeFile, ensureDir } = fs;
 
 export type WriteStrategy = "create" | "merge" | "overwrite" | "skip";
 
@@ -82,8 +84,6 @@ export async function safeWriteFile(
 	options: FileWriteOptions = {},
 ): Promise<boolean> {
 	const { strategy = "create" } = options;
-	const { writeFile, ensureDir } = await import("fs-extra");
-	const { dirname } = await import("pathe");
 
 	if (existsSync(filePath)) {
 		if (strategy === "skip") {

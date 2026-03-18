@@ -1,4 +1,5 @@
-import { pathExists, writeFile, ensureDir } from "fs-extra";
+import fs from "fs-extra";
+import type { PackageJson } from "fs-extra";
 import { resolve } from "pathe";
 import ora from "ora";
 import inquirer from "inquirer";
@@ -6,7 +7,11 @@ import { PACKAGE_NAMES, HUSKY_PRE_COMMIT, HUSKY_COMMIT_MSG } from "../constants"
 import { installPackage, runNpx, type PackageManager } from "../utils/executor";
 import { logger } from "../utils/logger";
 
+const { pathExists, writeFile, ensureDir, writeJson } = fs;
+
 export async function setupHusky(
+	packageJson: PackageJson,
+	packageJsonPath: string,
 	cwd: string,
 	packageManager: PackageManager,
 	isInstalled: boolean,
@@ -86,6 +91,23 @@ export async function setupHusky(
 	} else {
 		await writeFile(commitMsgPath, HUSKY_COMMIT_MSG, "utf-8");
 		logger.success("Created .husky/commit-msg");
+	}
+
+	// Add prepare script to package.json
+	const scripts = packageJson.scripts ?? {};
+	if (!scripts.prepare) {
+		scripts.prepare = "husky";
+		packageJson.scripts = scripts;
+
+		try {
+			await writeJson(packageJsonPath, packageJson, { spaces: 2 });
+			logger.success('Added "prepare" script to package.json');
+		} catch (error) {
+			logger.error(`Failed to update package.json: ${error}`);
+			return false;
+		}
+	} else {
+		logger.info('"prepare" script already exists in package.json');
 	}
 
 	return true;

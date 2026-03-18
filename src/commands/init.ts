@@ -1,5 +1,5 @@
+import fs from "fs-extra";
 import type { PackageJson } from "fs-extra";
-import { existsSync, readJsonSync, writeJsonSync } from "fs-extra";
 import { resolve } from "pathe";
 import ora from "ora";
 import inquirer from "inquirer";
@@ -79,6 +79,7 @@ export async function initCommand(options: InitOptions): Promise<void> {
 	await setupOxfmt(
 		envResult.packageJson,
 		envResult.packageJsonPath,
+		cwd,
 		packageManager,
 		envResult.installedPackages.oxfmt,
 	);
@@ -91,7 +92,13 @@ export async function initCommand(options: InitOptions): Promise<void> {
 		envResult.installedPackages.oxlint,
 	);
 
-	await setupHusky(cwd, packageManager, envResult.installedPackages.husky);
+	await setupHusky(
+		envResult.packageJson,
+		envResult.packageJsonPath,
+		cwd,
+		packageManager,
+		envResult.installedPackages.husky,
+	);
 
 	await setupLintStaged(
 		envResult.packageJson,

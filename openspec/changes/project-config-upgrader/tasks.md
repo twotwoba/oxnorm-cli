@@ -110,18 +110,18 @@
 
 - [ ] 14.1 Set up Vitest test environment with coverage configuration
 - [ ] 14.2 Create mock utilities for execa, fs-extra, and inquirer
-- [ ] 14.3 Write unit tests for all utility modules (logger, executor, file-utils, package-manager)
-- [ ] 14.4 Write unit tests for version-check module
+- [x] 14.3 Write unit tests for all utility modules (logger, executor, file-utils, package-manager)
+- [x] 14.4 Write unit tests for version-check module
 - [ ] 14.5 Write unit tests for editor-setup module
-- [ ] 14.6 Write unit tests for legacy-cleanup module
+- [x] 14.6 Write unit tests for legacy-cleanup module
 - [ ] 14.7 Write unit tests for all setup modules (oxfmt, oxlint, husky, lint-staged, commitlint)
 - [ ] 14.8 Write integration tests for full init flow
 - [ ] 14.9 Achieve minimum 80% test coverage
 
 ## 15. Documentation and Polish
 
-- [ ] 15.1 Add README.md with installation and usage instructions
-- [ ] 15.2 Document all CLI flags and options
+- [x] 15.1 Add README.md with installation and usage instructions
+- [x] 15.2 Document all CLI flags and options
 - [ ] 15.3 Add inline code comments for complex logic
 - [ ] 15.4 Test on Windows, macOS, and Linux
 - [ ] 15.5 Final code review and cleanup with oxlint and oxfmt

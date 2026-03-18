@@ -1,11 +1,13 @@
 import inquirer from "inquirer";
-import { resolve } from "pathe";
-import { ensureDir } from "fs-extra";
+import { resolve, dirname } from "pathe";
+import fs from "fs-extra";
 import { VSCODE_SETTINGS, ZED_SETTINGS } from "../constants";
 import { safeWriteJson, type WriteStrategy } from "../utils/file-utils";
 import { logger } from "../utils/logger";
 
-export type EditorType = "vscode" | "zed" | "none";
+const { ensureDir, pathExists } = fs;
+
+export type EditorType = "vscode" | "zed";
 
 export interface EditorSetupResult {
 	vscode: boolean;
@@ -32,7 +34,7 @@ export async function promptEditorSelection(): Promise<EditorType[]> {
 
 export async function setupVSCode(cwd: string, strategy: WriteStrategy = "merge"): Promise<boolean> {
 	const vscodeDir = resolve(cwd, ".vscode");
-	const settingsPath = resolve(vscodeDir, ".vscode/settings.json");
+	const settingsPath = resolve(vscodeDir, "settings.json");
 
 	await ensureDir(vscodeDir);
 
@@ -41,7 +43,7 @@ export async function setupVSCode(cwd: string, strategy: WriteStrategy = "merge"
 
 export async function setupZed(cwd: string, strategy: WriteStrategy = "merge"): Promise<boolean> {
 	const zedDir = resolve(cwd, ".zed");
-	const settingsPath = resolve(zedDir, ".zed/settings.json");
+	const settingsPath = resolve(zedDir, "settings.json");
 
 	await ensureDir(zedDir);
 
@@ -56,41 +58,57 @@ export async function setupEditors(cwd: string): Promise<EditorSetupResult> {
 	};
 
 	if (selectedEditors.includes("vscode")) {
-		const { strategy } = await inquirer.prompt<{
-			strategy: WriteStrategy;
-		}>([
-			{
-				type: "list",
-				name: "strategy",
-				message: "VSCode settings already exist. What would you like to do?",
-				choices: [
-					{ name: "Merge with existing settings", value: "merge" },
-					{ name: "Overwrite existing settings", value: "overwrite" },
-					{ name: "Skip", value: "skip" },
-				],
-				default: "merge",
-			},
-		]);
+		const vscodeDir = resolve(cwd, ".vscode");
+		const settingsPath = resolve(vscodeDir, "settings.json");
+		const fileExists = await pathExists(settingsPath);
+
+		let strategy: WriteStrategy = "merge";
+		if (fileExists) {
+			const { action } = await inquirer.prompt<{
+				action: WriteStrategy;
+			}>([
+				{
+					type: "list",
+					name: "action",
+					message: "VSCode settings.json already exists. What would you like to do?",
+					choices: [
+						{ name: "Merge (preserve existing, add OXC settings)", value: "merge" },
+						{ name: "Overwrite (replace with OXC settings only)", value: "overwrite" },
+						{ name: "Skip", value: "skip" },
+					],
+					default: "merge",
+				},
+			]);
+			strategy = action;
+		}
 
 		result.vscode = await setupVSCode(cwd, strategy);
 	}
 
 	if (selectedEditors.includes("zed")) {
-		const { strategy } = await inquirer.prompt<{
-			strategy: WriteStrategy;
-		}>([
-			{
-				type: "list",
-				name: "strategy",
-				message: "Zed settings already exist. What would you like to do?",
-				choices: [
-					{ name: "Merge with existing settings", value: "merge" },
-					{ name: "Overwrite existing settings", value: "overwrite" },
-					{ name: "Skip", value: "skip" },
-				],
-				default: "merge",
-			},
-		]);
+		const zedDir = resolve(cwd, ".zed");
+		const settingsPath = resolve(zedDir, "settings.json");
+		const fileExists = await pathExists(settingsPath);
+
+		let strategy: WriteStrategy = "merge";
+		if (fileExists) {
+			const { action } = await inquirer.prompt<{
+				action: WriteStrategy;
+			}>([
+				{
+					type: "list",
+					name: "action",
+					message: "Zed settings.json already exists. What would you like to do?",
+					choices: [
+						{ name: "Merge (preserve existing, add OXC settings)", value: "merge" },
+						{ name: "Overwrite (replace with OXC settings only)", value: "overwrite" },
+						{ name: "Skip", value: "skip" },
+					],
+					default: "merge",
+				},
+			]);
+			strategy = action;
+		}
 
 		result.zed = await setupZed(cwd, strategy);
 	}

@@ -1,8 +1,10 @@
-import { readdirSync, unlinkSync, existsSync } from "fs-extra";
+import fs from "fs-extra";
 import { resolve } from "pathe";
 import inquirer from "inquirer";
 import { LEGACY_CONFIG_PATTERNS } from "../constants";
 import { logger } from "../utils/logger";
+
+const { readdirSync, unlinkSync, existsSync } = fs;
 
 export interface LegacyFile {
 	path: string;
@@ -55,17 +57,19 @@ export async function promptLegacyCleanup(files: LegacyFile[]): Promise<LegacyFi
 		{
 			type: "list",
 			name: "action",
-			message: "What would you like to do with these files?",
+			message: "What would you like to do with these legacy config files?",
 			choices: [
-				{ name: "Remove all", value: "all" },
-				{ name: "Select files to remove", value: "select" },
-				{ name: "Keep all", value: "none" },
+				{ name: "Delete all (recommended)", value: "all" },
+				{ name: "Select files to delete", value: "select" },
+				{ name: "Keep all (not recommended, may cause conflicts)", value: "none" },
 			],
+			default: "all",
 		},
 	]);
 
 	if (action === "none") {
 		logger.info("Keeping all legacy config files.");
+		logger.warning("Note: This may cause conflicts with the new OXC tools.");
 		return [];
 	}
 
@@ -79,10 +83,11 @@ export async function promptLegacyCleanup(files: LegacyFile[]): Promise<LegacyFi
 		{
 			type: "checkbox",
 			name: "selectedFiles",
-			message: "Select files to remove:",
+			message: "Select files to delete:",
 			choices: files.map((f) => ({
 				name: `${f.type}: ${f.path}`,
 				value: f.path,
+				checked: true,
 			})),
 		},
 	]);

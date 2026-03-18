@@ -1,11 +1,13 @@
+import fs from "fs-extra";
 import type { PackageJson } from "fs-extra";
-import { writeJson, pathExists } from "fs-extra";
 import { resolve } from "pathe";
 import ora from "ora";
 import inquirer from "inquirer";
 import { PACKAGE_NAMES, LINT_STAGED_CONFIG } from "../constants";
 import { installPackage, type PackageManager } from "../utils/executor";
 import { deepMerge, logger } from "../utils";
+
+const { writeJson, pathExists } = fs;
 
 export async function setupLintStaged(
 	packageJson: PackageJson,

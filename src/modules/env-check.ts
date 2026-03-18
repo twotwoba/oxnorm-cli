@@ -1,7 +1,9 @@
-import { existsSync, readJsonSync } from "fs-extra";
-import { resolve } from "pathe";
+import fs from "fs-extra";
 import type { PackageJson } from "fs-extra";
+import { resolve } from "pathe";
 import { PACKAGE_NAMES } from "../constants";
+
+const { existsSync, readJsonSync } = fs;
 
 export interface EnvironmentCheckResult {
 	hasPackageJson: boolean;
