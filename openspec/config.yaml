@@ -2,7 +2,7 @@ schema: spec-driven
 
 context: |
     Description: A cli that help developer config oxlint&oxfmt&husky&lint-staged&commitlint quickly
-    Tech stack：TypeScript, Vite, vitest, commander.js, fs-extra, pathe, gradient-string, figlet, inquirer, ora, chalk, execa, detect-package-manager, semver
+    Tech stack：TypeScript, tsup, Vite, vitest, commander.js, fs-extra, pathe, gradient-string, figlet, inquirer, ora, chalk, execa, detect-package-manager, semver
     Style: oxlint, oxfmt, strict TypeScript
 
 rules:
