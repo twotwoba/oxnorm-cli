@@ -29,6 +29,10 @@ jobs:
                   registry-url: 'https://registry.npmjs.org'
                   cache: 'pnpm'
 
+            # npm Trusted Publishers 需要 npm 11.5.1+
+            - name: Upgrade npm for OIDC support
+              run: npm install -g npm@latest
+
             - name: Install dependencies
               run: pnpm install
 
