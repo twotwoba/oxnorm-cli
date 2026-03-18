@@ -1,6 +1,6 @@
 {
     "name": "oxnorm-cli",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "A CLI tool to help developers quickly configure oxlint, oxfmt, husky, lint-staged, and commitlint",
     "keywords": [
         "cli",
@@ -12,7 +12,7 @@
         "oxlint"
     ],
     "license": "MIT",
-    "author": "",
+    "author": "EricYuan",
     "bin": {
         "ox": "./dist/index.js"
     },
