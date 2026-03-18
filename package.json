@@ -69,7 +69,7 @@
         "*": "oxfmt --no-error-on-unmatched-pattern"
     },
     "engines": {
-        "node": ">=18.18.0"
+        "node": ">=20.12.0"
     },
     "pnpm": {
         "overrides": {
