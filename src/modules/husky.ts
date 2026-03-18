@@ -7,10 +7,10 @@ import { PACKAGE_NAMES, HUSKY_PRE_COMMIT, HUSKY_COMMIT_MSG } from "../constants"
 import { installPackage, runNpx, type PackageManager } from "../utils/executor";
 import { logger } from "../utils/logger";
 
-const { pathExists, writeFile, ensureDir, writeJson } = fs;
+const { pathExists, writeFile, ensureDir, writeJson, readJson } = fs;
 
 export async function setupHusky(
-	packageJson: PackageJson,
+	_packageJson: PackageJson,
 	packageJsonPath: string,
 	cwd: string,
 	packageManager: PackageManager,
@@ -31,6 +31,9 @@ export async function setupHusky(
 			return false;
 		}
 	}
+
+	// Re-read package.json to get the latest content (with newly installed deps)
+	const packageJson = await readJson(packageJsonPath);
 
 	// Initialize husky
 	const huskyDir = resolve(cwd, ".husky");

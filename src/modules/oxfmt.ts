@@ -6,10 +6,10 @@ import { PACKAGE_NAMES } from "../constants";
 import { installPackage, type PackageManager } from "../utils/executor";
 import { logger } from "../utils/logger";
 
-const { writeJson, pathExists } = fs;
+const { writeJson, pathExists, readJson } = fs;
 
 export async function setupOxfmt(
-	packageJson: PackageJson,
+	_packageJson: PackageJson,
 	packageJsonPath: string,
 	cwd: string,
 	packageManager: PackageManager,
@@ -30,6 +30,9 @@ export async function setupOxfmt(
 			return false;
 		}
 	}
+
+	// Re-read package.json to get the latest content (with newly installed deps)
+	const packageJson = await readJson(packageJsonPath);
 
 	// Add scripts to package.json
 	const scripts = packageJson.scripts ?? {};
@@ -76,7 +79,7 @@ export async function setupOxfmt(
 	} catch (error) {
 		logger.error(`Failed to update package.json: ${error}`);
 		return false;
-	 }
+	}
 
 	return true;
 }

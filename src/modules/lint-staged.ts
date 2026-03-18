@@ -7,10 +7,10 @@ import { PACKAGE_NAMES, LINT_STAGED_CONFIG } from "../constants";
 import { installPackage, type PackageManager } from "../utils/executor";
 import { deepMerge, logger } from "../utils";
 
-const { writeJson, pathExists } = fs;
+const { writeJson, pathExists, readJson } = fs;
 
 export async function setupLintStaged(
-	packageJson: PackageJson,
+	_packageJson: PackageJson,
 	packageJsonPath: string,
 	cwd: string,
 	packageManager: PackageManager,
@@ -31,6 +31,9 @@ export async function setupLintStaged(
 			return false;
 		}
 	}
+
+	// Re-read package.json to get the latest content (with newly installed deps)
+	const packageJson = await readJson(packageJsonPath);
 
 	// Check for existing lint-staged config
 	const lintStagedPath = resolve(cwd, ".lintstagedrc.json");
