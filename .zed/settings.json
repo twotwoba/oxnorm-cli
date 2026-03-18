@@ -1,0 +1,49 @@
+{
+    "tab_size": 4,
+    "format_on_save": "on",
+    "formatter": "language_server",
+    "languages": {
+        "TypeScript": {
+            "formatter": {
+                "language_server": {
+                    "name": "oxfmt"
+                }
+            }
+        },
+        "JavaScript": {
+            "formatter": {
+                "language_server": {
+                    "name": "oxfmt"
+                }
+            }
+        },
+        "TSX": {
+            "formatter": {
+                "language_server": {
+                    "name": "oxfmt"
+                }
+            }
+        },
+        "Vue.js": {
+            "formatter": {
+                "language_server": {
+                    "name": "oxfmt"
+                }
+            }
+        },
+        "JSON": {
+            "formatter": {
+                "language_server": {
+                    "name": "oxfmt"
+                }
+            }
+        },
+        "JSONC": {
+            "formatter": {
+                "language_server": {
+                    "name": "oxfmt"
+                }
+            }
+        }
+    }
+}

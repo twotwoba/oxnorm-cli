@@ -4,7 +4,7 @@
 - [x] 1.2 Install core dependencies (commander, inquirer, execa, fs-extra, pathe, ora, chalk, gradient-string, figlet, detect-package-manager, semver)
 - [x] 1.3 Install dev dependencies (vite, vitest, oxlint, oxfmt, typescript, @types/node)
 - [x] 1.4 Configure Vite build for CLI output (ESM format)
-- [x] 1.5 Create source directory structure (commands/, modules/, utils/, constants/, __tests__/)
+- [x] 1.5 Create source directory structure (commands/, modules/, utils/, constants/, **tests**/)
 - [x] 1.6 Configure Vitest with coverage settings
 
 ## 2. CLI Entry Point

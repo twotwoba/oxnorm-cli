@@ -35,6 +35,7 @@ ox init
 ```
 
 This will:
+
 1. Check your Node.js version
 2. Ask which editors to configure (VSCode/Zed)
 3. Ask about removing legacy config files
@@ -49,49 +50,56 @@ ox init --skip-version-check
 ## What gets configured
 
 ### oxfmt
+
 - Installs `oxfmt` as dev dependency
 - Adds `format` script to package.json
 
 ### oxlint
+
 - Installs `oxlint` as dev dependency
 - Creates `.oxlintrc.json` configuration
 - Adds `lint` script to package.json
 
 ### husky
+
 - Installs `husky` as dev dependency
 - Creates `.husky/pre-commit` hook
 - Creates `.husky/commit-msg` hook
 
 ### lint-staged
+
 - Installs `lint-staged` as dev dependency
 - Configures lint-staged in package.json
 
 ### commitlint
+
 - Installs `@commitlint/cli` and `@commitlint/config-conventional`
 - Creates `commitlint.config.js` with custom rules
 
 ### Editor configuration
 
 **VSCode** (`.vscode/settings.json`):
+
 ```json
 {
     "oxc.fmt.configPath": ".oxfmtrc.json",
     "editor.defaultFormatter": "oxc.oxc-vscode",
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": true
 }
 ```
 
 **Zed** (`.zed/settings.json`):
+
 ```json
 {
-  "tab_size": 4,
-  "format_on_save": "on",
-  "formatter": "language_server",
-  "languages": {
-    "TypeScript": { "formatter": { "language_server": { "name": "oxfmt" } } },
-    "JavaScript": { "formatter": { "language_server": { "name": "oxfmt" } } },
-    // ...
-  }
+    "tab_size": 4,
+    "format_on_save": "on",
+    "formatter": "language_server",
+    "languages": {
+        "TypeScript": { "formatter": { "language_server": { "name": "oxfmt" } } },
+        "JavaScript": { "formatter": { "language_server": { "name": "oxfmt" } } }
+        // ...
+    }
 }
 ```
 
@@ -99,20 +107,20 @@ ox init --skip-version-check
 
 This tool configures commitlint with the following commit types:
 
-| Type | Description |
-|------|-------------|
-| `feat` | New feature |
-| `fix` | Bug fix |
-| `docs` | Documentation changes |
-| `style` | Code style changes (formatting, etc.) |
-| `refactor` | Code refactoring |
-| `perf` | Performance improvements |
-| `test` | Adding or updating tests |
-| `build` | Build system changes |
-| `ci` | CI/CD configuration |
-| `chore` | Maintenance tasks |
-| `revert` | Revert a previous commit |
-| `release` | Release version |
+| Type       | Description                           |
+| ---------- | ------------------------------------- |
+| `feat`     | New feature                           |
+| `fix`      | Bug fix                               |
+| `docs`     | Documentation changes                 |
+| `style`    | Code style changes (formatting, etc.) |
+| `refactor` | Code refactoring                      |
+| `perf`     | Performance improvements              |
+| `test`     | Adding or updating tests              |
+| `build`    | Build system changes                  |
+| `ci`       | CI/CD configuration                   |
+| `chore`    | Maintenance tasks                     |
+| `revert`   | Revert a previous commit              |
+| `release`  | Release version                       |
 
 Example: `feat: add user authentication`
 
