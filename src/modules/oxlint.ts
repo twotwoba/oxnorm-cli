@@ -22,7 +22,7 @@ export async function setupOxlint(
 	} else {
 		try {
 			spinner.text = "Installing oxlint...";
-			await installPackage(PACKAGE_NAMES.oxlint, packageManager, true);
+			await installPackage(PACKAGE_NAMES.oxlint, packageManager, true, { cwd });
 			spinner.succeed("oxlint installed successfully");
 		} catch (error) {
 			spinner.fail("Failed to install oxlint");

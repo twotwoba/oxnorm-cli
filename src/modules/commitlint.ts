@@ -24,6 +24,7 @@ export async function setupCommitlint(
 				[PACKAGE_NAMES.commitlint, PACKAGE_NAMES.commitlintConfig],
 				packageManager,
 				true,
+				{ cwd },
 			);
 			spinner.succeed("commitlint installed successfully");
 		} catch (error) {

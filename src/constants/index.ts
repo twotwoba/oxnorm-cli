@@ -1,75 +1,108 @@
 export const MIN_NODE_VERSION = "18.18.0";
 
 export const PACKAGE_NAMES = {
-	oxfmt: "oxfmt",
-	oxlint: "oxlint",
-	husky: "husky",
-	lintStaged: "lint-staged",
-	commitlint: "@commitlint/cli",
-	commitlintConfig: "@commitlint/config-conventional",
+    oxfmt: "oxfmt",
+    oxlint: "oxlint",
+    husky: "husky",
+    lintStaged: "lint-staged",
+    commitlint: "@commitlint/cli",
+    commitlintConfig: "@commitlint/config-conventional",
 } as const;
 
 export const LEGACY_CONFIG_PATTERNS = {
-	prettier: [".prettierrc", ".prettierrc.json", ".prettierrc.yml", ".prettierrc.yaml", ".prettierrc.toml", ".prettierrc.js", ".prettierrc.cjs", ".prettierignore", "prettier.config.js", "prettier.config.cjs"],
-	eslint: [".eslintrc", ".eslintrc.json", ".eslintrc.yml", ".eslintrc.yaml", ".eslintrc.js", ".eslintrc.cjs", ".eslintignore", "eslint.config.js", "eslint.config.mjs", "eslint.config.cjs", "eslint.config.ts"],
-	stylelint: [".stylelintrc", ".stylelintrc.json", ".stylelintrc.yml", ".stylelintrc.yaml", ".stylelintrc.js", ".stylelintrc.cjs", ".stylelintignore", "stylelint.config.js", "stylelint.config.cjs", "stylelint.config.mjs"],
+    prettier: [
+        ".prettierrc",
+        ".prettierrc.json",
+        ".prettierrc.yml",
+        ".prettierrc.yaml",
+        ".prettierrc.toml",
+        ".prettierrc.js",
+        ".prettierrc.cjs",
+        ".prettierignore",
+        "prettier.config.js",
+        "prettier.config.cjs",
+    ],
+    eslint: [
+        ".eslintrc",
+        ".eslintrc.json",
+        ".eslintrc.yml",
+        ".eslintrc.yaml",
+        ".eslintrc.js",
+        ".eslintrc.cjs",
+        ".eslintignore",
+        "eslint.config.js",
+        "eslint.config.mjs",
+        "eslint.config.cjs",
+        "eslint.config.ts",
+    ],
+    stylelint: [
+        ".stylelintrc",
+        ".stylelintrc.json",
+        ".stylelintrc.yml",
+        ".stylelintrc.yaml",
+        ".stylelintrc.js",
+        ".stylelintrc.cjs",
+        ".stylelintignore",
+        "stylelint.config.js",
+        "stylelint.config.cjs",
+        "stylelint.config.mjs",
+    ],
 } as const;
 
 export const VSCODE_SETTINGS = {
-	editorFormatOnSave: true,
-	editorCodeActionsOnSave: {
-		"source.fixAll.oxc": "always",
-	},
+    "oxc.fmt.configPath": ".oxfmtrc.json",
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.formatOnSave": true,
 } as const;
 
 export const ZED_SETTINGS = {
-	tab_size: 4,
-	format_on_save: "on",
-	formatter: "language_server",
-	languages: {
-		TypeScript: {
-			formatter: {
-				language_server: {
-					name: "oxfmt",
-				},
-			},
-		},
-		JavaScript: {
-			formatter: {
-				language_server: {
-					name: "oxfmt",
-				},
-			},
-		},
-		TSX: {
-			formatter: {
-				language_server: {
-					name: "oxfmt",
-				},
-			},
-		},
-		"Vue.js": {
-			formatter: {
-				language_server: {
-					name: "oxfmt",
-				},
-			},
-		},
-		JSON: {
-			formatter: {
-				language_server: {
-					name: "oxfmt",
-				},
-			},
-		},
-		JSONC: {
-			formatter: {
-				language_server: {
-					name: "oxfmt",
-				},
-			},
-		},
-	},
+    tab_size: 4,
+    format_on_save: "on",
+    formatter: "language_server",
+    languages: {
+        TypeScript: {
+            formatter: {
+                language_server: {
+                    name: "oxfmt",
+                },
+            },
+        },
+        JavaScript: {
+            formatter: {
+                language_server: {
+                    name: "oxfmt",
+                },
+            },
+        },
+        TSX: {
+            formatter: {
+                language_server: {
+                    name: "oxfmt",
+                },
+            },
+        },
+        "Vue.js": {
+            formatter: {
+                language_server: {
+                    name: "oxfmt",
+                },
+            },
+        },
+        JSON: {
+            formatter: {
+                language_server: {
+                    name: "oxfmt",
+                },
+            },
+        },
+        JSONC: {
+            formatter: {
+                language_server: {
+                    name: "oxfmt",
+                },
+            },
+        },
+    },
 } as const;
 
 export const COMMITLINT_CONFIG = `export default {
@@ -131,21 +164,22 @@ export const COMMITLINT_CONFIG = `export default {
 `;
 
 export const OXLINTRC_CONFIG = {
-	$schema: "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
-	categories: {
-		correctness: "warn",
-		suspicious: "warn",
-		perf: "warn",
-		complexity: "warn",
-		style: "warn",
-		nursery: "off",
-	},
-	rules: {},
+    $schema:
+        "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
+    categories: {
+        correctness: "warn",
+        suspicious: "warn",
+        perf: "warn",
+        complexity: "warn",
+        style: "warn",
+        nursery: "off",
+    },
+    rules: {},
 } as const;
 
 export const LINT_STAGED_CONFIG = {
-	"*.{js,jsx,ts,tsx}": ["oxlint --fix", "oxfmt --write"],
-	"*.{json,md,yml,yaml}": ["oxfmt --write"],
+    "*.{js,jsx,ts,tsx,mjs,cjs,vue}": "npm run lint",
+    "*": "oxfmt --no-error-on-unmatched-pattern",
 } as const;
 
 export const HUSKY_PRE_COMMIT = `npx lint-staged`;

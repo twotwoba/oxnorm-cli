@@ -103,6 +103,7 @@ export async function initCommand(options: InitOptions): Promise<void> {
 	await setupLintStaged(
 		envResult.packageJson,
 		envResult.packageJsonPath,
+		cwd,
 		packageManager,
 		envResult.installedPackages.lintStaged,
 	);

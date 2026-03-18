@@ -12,6 +12,7 @@ const { writeJson, pathExists } = fs;
 export async function setupLintStaged(
 	packageJson: PackageJson,
 	packageJsonPath: string,
+	cwd: string,
 	packageManager: PackageManager,
 	isInstalled: boolean,
 ): Promise<boolean> {
@@ -22,7 +23,7 @@ export async function setupLintStaged(
 	} else {
 		try {
 			spinner.text = "Installing lint-staged...";
-			await installPackage(PACKAGE_NAMES.lintStaged, packageManager, true);
+			await installPackage(PACKAGE_NAMES.lintStaged, packageManager, true, { cwd });
 			spinner.succeed("lint-staged installed successfully");
 		} catch (error) {
 			spinner.fail("Failed to install lint-staged");
@@ -32,7 +33,7 @@ export async function setupLintStaged(
 	}
 
 	// Check for existing lint-staged config
-	const lintStagedPath = resolve(process.cwd(), ".lintstagedrc.json");
+	const lintStagedPath = resolve(cwd, ".lintstagedrc.json");
 	const hasLintStagedRc = await pathExists(lintStagedPath);
 	const hasPackageJsonConfig = "lint-staged" in packageJson;
 

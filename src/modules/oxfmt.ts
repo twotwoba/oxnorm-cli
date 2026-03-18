@@ -22,7 +22,7 @@ export async function setupOxfmt(
 	} else {
 		try {
 			spinner.text = "Installing oxfmt...";
-			await installPackage(PACKAGE_NAMES.oxfmt, packageManager, true);
+			await installPackage(PACKAGE_NAMES.oxfmt, packageManager, true, { cwd });
 			spinner.succeed("oxfmt installed successfully");
 		} catch (error) {
 			spinner.fail("Failed to install oxfmt");

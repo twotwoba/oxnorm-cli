@@ -23,7 +23,7 @@ export async function setupHusky(
 	} else {
 		try {
 			spinner.text = "Installing husky...";
-			await installPackage(PACKAGE_NAMES.husky, packageManager, true);
+			await installPackage(PACKAGE_NAMES.husky, packageManager, true, { cwd });
 			spinner.succeed("husky installed successfully");
 		} catch (error) {
 			spinner.fail("Failed to install husky");
