@@ -71,7 +71,7 @@ export async function promptLegacyCleanup(
                     value: "none",
                 },
             ],
-            default: 0,
+            default: "all",
         },
     ]);
 

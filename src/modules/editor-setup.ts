@@ -37,9 +37,7 @@ async function mergeVSCodeSettings(
 /**
  * 显示选项并提示用户选择
  */
-async function promptStrategy(
-    fileType: string,
-): Promise<WriteStrategy> {
+async function promptStrategy(fileType: string): Promise<WriteStrategy> {
     const { action } = await inquirer.prompt<{ action: WriteStrategy }>([
         {
             type: "rawlist",
@@ -47,16 +45,16 @@ async function promptStrategy(
             message: `${fileType} already exists. What would you like to do?`,
             choices: [
                 {
-                    name: "Merge (preserve existing, add OXC settings)",
-                    value: "merge",
-                },
-                {
                     name: "Overwrite (replace with OXC settings only)",
                     value: "overwrite",
                 },
+                {
+                    name: "Merge (preserve existing, add OXC settings)",
+                    value: "merge",
+                },
                 { name: "Skip", value: "skip" },
             ],
-            default: 0,
+            default: "overwrite",
         },
     ]);
 
