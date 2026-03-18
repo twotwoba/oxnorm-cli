@@ -1,4 +1,4 @@
-# oxcinit
+# oxnorm
 
 A CLI tool to help developers quickly configure [oxlint](https://oxc.rs/docs/guide/usage/linter.html), [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html), [husky](https://typicode.github.io/husky/), [lint-staged](https://github.com/lint-staged/lint-staged), and [commitlint](https://commitlint.js.org/) for their projects.
 
@@ -20,13 +20,9 @@ A CLI tool to help developers quickly configure [oxlint](https://oxc.rs/docs/gui
 
 ```bash
 # Using pnpm (recommended)
-pnpm add -D oxcinit
-
+pnpm add oxnorm -g
 # Using npm
-npm install -D oxcinit
-
-# Using yarn
-yarn add -D oxcinit
+npm install oxnorm -g
 ```
 
 ## Usage
@@ -35,7 +31,7 @@ yarn add -D oxcinit
 
 ```bash
 # Run in your project directory
-npx oxcinit init
+ox init
 ```
 
 This will:
@@ -47,7 +43,7 @@ This will:
 ### Skip version check
 
 ```bash
-npx oxcinit init --skip-version-check
+ox init --skip-version-check
 ```
 
 ## What gets configured
@@ -79,10 +75,9 @@ npx oxcinit init --skip-version-check
 **VSCode** (`.vscode/settings.json`):
 ```json
 {
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.oxc": "always"
-  }
+    "oxc.fmt.configPath": ".oxfmtrc.json",
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.formatOnSave": true,
 }
 ```
 
@@ -94,7 +89,8 @@ npx oxcinit init --skip-version-check
   "formatter": "language_server",
   "languages": {
     "TypeScript": { "formatter": { "language_server": { "name": "oxfmt" } } },
-    "JavaScript": { "formatter": { "language_server": { "name": "oxfmt" } } }
+    "JavaScript": { "formatter": { "language_server": { "name": "oxfmt" } } },
+    // ...
   }
 }
 ```

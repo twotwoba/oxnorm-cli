@@ -4,7 +4,7 @@
 
 ## What Changes
 
-- 新增 CLI 工具 `oxcinit`，用于自动化项目配置升级
+- 新增 CLI 工具 `oxnorm`，用于自动化项目配置升级
 - 实现包检测功能，自动识别已安装的工具包并跳过对应配置阶段
 - 实现旧配置文件清理功能，支持交互式询问用户是否删除 prettier、eslint、stylelint 相关文件
 - 实现 husky 自动配置，生成 `pre-commit` 和 `commit-msg` hooks
